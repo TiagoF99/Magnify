@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "81244057783",
+    "firebase_url": "https://magnify-3b555.firebaseio.com",
+    "project_id": "magnify-3b555",
+    "storage_bucket": "magnify-3b555.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81244057783:android:4cfad9be06ed6c560f1d32",
+        "android_client_info": {
+          "package_name": "com.tiago.magnify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81244057783-aeks9cvvufsum4av1u885bq1nmra738c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCC_AfQJem5wAENd8DbYanmQyXMOenDEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81244057783-aeks9cvvufsum4av1u885bq1nmra738c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
