@@ -57,7 +57,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             packages.add(new RNFirebaseMessagingPackage());
             packages.add(new RNFirebaseNotificationsPackage());
             packages.add(new RNFirebasePerformancePackage());
-            packages.add(new RNFirebaseStoragePackage());
+            //packages.add(new RNFirebaseStoragePackage());
         return packages;
     }
 
