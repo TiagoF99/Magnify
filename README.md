@@ -43,19 +43,8 @@ Java
 - 5.2) **[iOS]** Build and run the iOS app, run `npm run ios` or `yarn run ios` from the root of your project. The first build will take some time. This will automatically start up a simulator also for you on a successful build if one wasn't already started.
 - 5.3) **[Android]** If you haven't already got an android device attached/emulator running then you'll need to get one running (make sure the emulator is with Google Play / APIs). When ready run `npm run android` or `yarn run android` from the root of your project.
 
-If all has gone well you'll see an initial screen like the one below.
-
-## Screenshots
-
-![preview](https://i.imgur.com/4lG4HuS.png)
-
-
-## Contributors
+### react-native-firebase
 This code is A react native app built with [`react-native-firebase`](https://github.com/invertase/react-native-firebase) pre-integrated
 
-
-
-
 ### License
-
 - See [LICENSE](/LICENSE)
