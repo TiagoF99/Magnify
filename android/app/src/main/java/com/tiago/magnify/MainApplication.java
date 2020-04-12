@@ -1,5 +1,6 @@
 package com.tiago.magnify;
 
+import com.tiago.magnify.generated.BasePackageList;
 import androidx.multidex.MultiDexApplication;
 
 import android.util.Log;
@@ -8,6 +9,7 @@ import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -30,8 +32,19 @@ import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 
 import java.util.List;
+import java.util.Arrays;
+import android.app.Application;
+//seperate
+
+
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+import org.unimodules.core.interfaces.SingletonModule;
+
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
+
+  private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -41,6 +54,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
     @Override
     protected List<ReactPackage> getPackages() {
+
         @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
@@ -59,6 +73,11 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             packages.add(new RNFirebaseNotificationsPackage());
             packages.add(new RNFirebasePerformancePackage());
             //packages.add(new RNFirebaseStoragePackage());
+            // Add unimodules
+            List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+              new ModuleRegistryAdapter(mModuleRegistryProvider)
+            );
+            packages.addAll(unimodules);
         return packages;
     }
 
