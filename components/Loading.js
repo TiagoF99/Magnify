@@ -1,6 +1,6 @@
 // Loading.js
 import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import firebase from 'react-native-firebase'
 
 
@@ -14,7 +14,6 @@ export default class Loading extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Loading..</Text>
-        <ActivityIndicator size="large" />
       </View>
     )
   }

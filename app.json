@@ -1,4 +1,12 @@
 {
   "name": "Magnify",
-  "displayName": "Magnify"
+  "displayName": "Magnify",
+  "packagerOpts": {
+    "config": "metro.config.js"
+  },
+  "expo": {
+    "packagerOpts": {
+      "config": "metro.config.js"
+    }
+  }
 }
