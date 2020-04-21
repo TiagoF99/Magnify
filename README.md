@@ -1,4 +1,10 @@
 ## Description
+This is an image classification mobile application that allows users to login in with an account and take photos of an item around them and have it classified by a Tensorflow & MobileNet model. This project was developed using React-Native, Firebase, and TensorflowJS.
+
+
+## DEMO
+![Screenshot](assets/Screenshot_20200421-134506_Magnify.jpg) ![Screenshot](assets/Screenshot_20200421-134511_Magnify.jpg)
+
 
 ## STACK
 ```
