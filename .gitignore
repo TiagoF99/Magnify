@@ -60,3 +60,13 @@ buck-out/
 /ios/Pods/
 
 /android/app/google-service.json
+
+# React Native
+.buckconfig
+.editorconfig
+.flowconfig
+.prettierrc.js
+.watchmanconfig
+babel.config.js
+yarn.lock
+bin/

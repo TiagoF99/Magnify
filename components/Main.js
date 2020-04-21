@@ -71,16 +71,16 @@ export default class Main extends React.Component {
       console.log("4")
       const imageAssetPath = Image.resolveAssetSource(this.state.image)
       console.log("5")
+      console.log("imageAssetPath: ", imageAssetPath)
       const response = await fetch(imageAssetPath.uri, {}, { isBinary: true })
       console.log("6")
       const rawImageData = await response.arrayBuffer()
-      console.log("7")
+      console.log("rawImageData = ", rawImageData)
       const imageTensor = this.imageToTensor(rawImageData)
-      console.log("8")
+      console.log("imageTensor = ", imageTensor)
       const predictions = await this.model.classify(imageTensor)
-      console.log("9")
       this.setState({ predictions })
-      console.log(predictions)
+      console.log("predictions = ", predictions)
     } catch (error) {
       console.log(error)
     }
@@ -96,7 +96,6 @@ export default class Main extends React.Component {
     try {
         const options = {
           title: 'Select Image',
-          customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
           storageOptions: {
             skipBackup: true,
             path: 'images',
@@ -104,7 +103,6 @@ export default class Main extends React.Component {
         };
         console.log("1")
         ImagePicker.showImagePicker(options, (response) => {
-        console.log('Response = ', response);
         console.log("2")
         if (response.didCancel) {
           console.log('User cancelled image picker');
@@ -115,6 +113,7 @@ export default class Main extends React.Component {
         } else {
           console.log("3")
           const source = { uri: response.uri }
+          console.log("source = ", source)
           this.setState({ image: source })
           this.classifyImage()
         }
@@ -132,6 +131,15 @@ export default class Main extends React.Component {
           console.log(e)
       }
   }
+
+  renderPrediction = prediction => {
+    return (
+      <Text key={prediction.className} style={styles.text}>
+        {prediction.className}
+      </Text>
+    )
+  }
+
 
   render() {
     const { currentUser, isTfReady, isModelReady, predictions, image } = this.state
