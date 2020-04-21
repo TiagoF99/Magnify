@@ -39,11 +39,19 @@ export default class Login extends React.Component {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Login" onPress={this.handleLogin} />
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={() => this.props.navigation.navigate('SignUp')}
-        />
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
+            <View style={styles.buttoncontainer}>
+              <Text style={styles.buttontext}>Login</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
+            <View style={styles.buttoncontainer}>
+              <Text style={styles.buttontext}>Signup</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+  
       </View>
     )
   }
@@ -52,13 +60,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#171f24'
   },
   textInput: {
     height: 40,
     width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
+    borderColor: '#ca867f',
+    borderWidth: 2,
+    borderRadius: 2,
     marginTop: 8
+  },
+  buttoncontainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#ca867f',
+    borderRadius: 2,
+    width: 80,
+    height: 30
+  },
+  buttontext: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: "serif"
   }
 })

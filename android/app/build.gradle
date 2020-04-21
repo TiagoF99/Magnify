@@ -203,6 +203,9 @@ dependencies {
     addUnimodulesDependencies()
     compile project(':react-native-fs')
 
+    // Image Picker
+    implementation project(':react-native-image-picker')
+
     /* ----------------------------
     *    REACT NATIVE FIREBASE
     * ---------------------------- */

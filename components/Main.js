@@ -16,6 +16,7 @@ import * as mobilenet from '@tensorflow-models/mobilenet'
 import Constants from 'expo-constants'
 import * as Permissions from 'expo-permissions'
 import * as jpeg from 'jpeg-js'
+import ImagePicker from 'react-native-image-picker';
 
 export default class Main extends React.Component {
   
@@ -67,11 +68,17 @@ export default class Main extends React.Component {
 
   classifyImage = async () => {
     try {
+      console.log("4")
       const imageAssetPath = Image.resolveAssetSource(this.state.image)
+      console.log("5")
       const response = await fetch(imageAssetPath.uri, {}, { isBinary: true })
+      console.log("6")
       const rawImageData = await response.arrayBuffer()
+      console.log("7")
       const imageTensor = this.imageToTensor(rawImageData)
+      console.log("8")
       const predictions = await this.model.classify(imageTensor)
+      console.log("9")
       this.setState({ predictions })
       console.log(predictions)
     } catch (error) {
@@ -85,19 +92,33 @@ export default class Main extends React.Component {
    - populate the source URI object in the state.image—if the image selection process isn’t canceled
    - invoke classifyImage() method to make predictions from the given input
   */
-  selectImage = async () => {
+  selectImage = () => {
     try {
-      let response = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3]
-      })
-
-      if (!response.cancelled) {
-        const source = { uri: response.uri }
-        this.setState({ image: source })
-        this.classifyImage()
-      }
+        const options = {
+          title: 'Select Image',
+          customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+          storageOptions: {
+            skipBackup: true,
+            path: 'images',
+          },
+        };
+        console.log("1")
+        ImagePicker.showImagePicker(options, (response) => {
+        console.log('Response = ', response);
+        console.log("2")
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          console.log("3")
+          const source = { uri: response.uri }
+          this.setState({ image: source })
+          this.classifyImage()
+        }
+      });
     } catch (error) {
       console.log(error)
     }
@@ -108,7 +129,7 @@ export default class Main extends React.Component {
           await firebase.auth().signOut()
           this.props.navigation.navigate('Login')
       } catch (e) {
-          console.log(e);
+          console.log(e)
       }
   }
 
@@ -119,7 +140,11 @@ export default class Main extends React.Component {
           <View style={styles.container}>
             <StatusBar barStyle='light-content' />
             <View style={styles.logoutContainer}>
-              <Button style={styles.logout} title="logout" onPress={() => this.signOutUser()} />
+              <TouchableOpacity style={styles.logout} onPress={() => this.signOutUser()}>
+                <View style={styles.logouttextcont}>
+                  <Text style={styles.outtext}>Logout</Text>
+                </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.loadingContainer}>
               <Text style={styles.text}>Hi {currentUser && currentUser.email}</Text>
@@ -127,18 +152,18 @@ export default class Main extends React.Component {
                 Is TFJS ready? {isTfReady ? <Text>Yes</Text> : <Text>No</Text>}
               </Text>
               <Text style={styles.text}>
-                Is Model ready? {isModelReady ? (<Text style={styles.text}>Yes</Text>) : (<ActivityIndicator size='small' />)}
+                Is Model ready? {isModelReady ? <Text style={styles.text}>Yes</Text> : <Text style={styles.text}>Loading Model...</Text>}
               </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.imageWrapper}
-              onPress={isModelReady ? this.selectImage : undefined}>
-              {image && <Image source={image} style={styles.imageContainer} />}
+              <TouchableOpacity
+                style={styles.imageWrapper}
+                onPress={isModelReady ? this.selectImage : undefined}>
+                {image && <Image source={image} style={styles.imageContainer} />}
 
-              {isModelReady && !image && (
-                <Text style={styles.text}>Tap to choose image</Text>
-              )}
-            </TouchableOpacity>
+                {isModelReady && !image && (
+                  <Text style={styles.text}>Tap to choose image</Text>
+                )}
+              </TouchableOpacity>
+            </View>
             <View style={styles.predictionWrapper}>
               {isModelReady && image && (
                 <Text style={styles.text}>
@@ -156,8 +181,7 @@ export default class Main extends React.Component {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: '#171f24',
-        alignItems: 'center'
+        backgroundColor: '#171f24'
       },
       loadingContainer: {
         marginTop: 60,
@@ -178,9 +202,21 @@ export default class Main extends React.Component {
         alignItems: 'flex-end'
       },
       logout: {
-        borderColor: '#ca867f',
-        borderWidth: 3,
-        backgroundColor: '#111111'
+        backgroundColor: '#ca867f',
+        borderRadius: 2,
+        marginRight: 40,
+        width: 80,
+        height: 30
+      },
+      outtext: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: "bold",
+        fontFamily: "serif"
+      },
+      logouttextcont: {
+        justifyContent: 'center',
+        alignItems: 'center',
       },
       imageWrapper: {
         width: 280,
@@ -193,7 +229,8 @@ export default class Main extends React.Component {
         marginBottom: 10,
         position: 'relative',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 2
       },
       imageContainer: {
         width: 250,

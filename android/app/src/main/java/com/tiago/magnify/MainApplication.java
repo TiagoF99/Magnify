@@ -41,6 +41,8 @@ import org.unimodules.adapters.react.ModuleRegistryAdapter;
 import org.unimodules.adapters.react.ReactModuleRegistryProvider;
 import org.unimodules.core.interfaces.SingletonModule;
 
+import com.imagepicker.ImagePickerPackage;
+
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
 
@@ -72,6 +74,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             packages.add(new RNFirebaseMessagingPackage());
             packages.add(new RNFirebaseNotificationsPackage());
             packages.add(new RNFirebasePerformancePackage());
+            // packages.add(new ImagePickerPackage());
             //packages.add(new RNFirebaseStoragePackage());
             // Add unimodules
             List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
