@@ -3,8 +3,7 @@ This is an image classification mobile application that allows users to login in
 
 
 ## DEMO
-![Screenshot](assets/(Screenshot_20200421-134506_Magnify.jpg)
-![Screenshot](assets/Screenshot_20200421-134511_Magnify.jpg)
+![Screenshot](assets/Screenshot_20200421-134506_Magnify.jpg) ![Screenshot](assets/Screenshot_20200421-134511_Magnify.jpg)
 
 
 ## STACK
