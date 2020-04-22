@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Image } from 'react-native'
 import firebase from 'react-native-firebase'
 
 
@@ -19,6 +19,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={require('./images/icon.png')} />
         <Text style={styles.title}>Magnify</Text>
         <Text style={styles.logintext}>Login</Text>
         {this.state.errorMessage &&
